@@ -52,7 +52,7 @@ typedef struct dictEntry {
         int64_t s64;
         double d;
     } v;
-    struct dictEntry *next;
+    struct dictEntry *next;//指向下个哈希表节点，形成链表
 } dictEntry;
 
 typedef struct dictType {
@@ -67,15 +67,15 @@ typedef struct dictType {
 /* This is our hash table structure. Every dictionary has two of this as we
  * implement incremental rehashing, for the old to the new table. */
 typedef struct dictht {
-    dictEntry **table;
-    unsigned long size;
-    unsigned long sizemask;
-    unsigned long used;
+    dictEntry **table;//哈希表数组
+    unsigned long size;//哈希表大小
+    unsigned long sizemask;//哈希表大小掩码，用于计算索引值,总是等于 size - 1
+    unsigned long used;//该哈希表已有节点的数量
 } dictht;
 
 typedef struct dict {
     dictType *type;
-    void *privdata;
+    void *privdata;//私有数据
     dictht ht[2];
     long rehashidx; /* rehashing not in progress if rehashidx == -1 */
     unsigned long iterators; /* number of iterators currently running */
