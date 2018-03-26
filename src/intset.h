@@ -27,14 +27,19 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+//整数集合的升级策略有两个好处， 一个是提升整数集合的灵活性， 另一个是尽可能地节约内存。
+
 
 #ifndef __INTSET_H
 #define __INTSET_H
 #include <stdint.h>
-
+//整数集合
 typedef struct intset {
+    //编码方式
     uint32_t encoding;
+    //集合包含的元素数量
     uint32_t length;
+    //保存元素的数组
     int8_t contents[];
 } intset;
 
