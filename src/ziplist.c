@@ -335,6 +335,7 @@ unsigned int zipStoreEntryEncoding(unsigned char *p, unsigned char encoding, uns
     if (ZIP_IS_STR(encoding)) {
         /* Although encoding is given it may not be set for strings,
          * so we determine it here using the raw length. */
+        //字节数组 63, 16383, 4294967295
         if (rawlen <= 0x3f) {
             if (!p) return len;
             buf[0] = ZIP_STR_06B | rawlen;
